@@ -27,8 +27,6 @@ public class SequentialActionGroup extends Action {
     public void transition() {
         this._current_action += this._direction;
 
-        System.out.printf( "transition %d \n", this._current_action );
-
         if( ( this._current_action >= this._actions.length && this._direction > 0 ) || ( this._current_action <= 0 && this._direction < 0 ) ) {
             this.complete();
         } else {
@@ -40,6 +38,7 @@ public class SequentialActionGroup extends Action {
     public void start() {
         super.start();
 
+        this.setCurrentAction( 0 );
         this._actions[ this.getCurrentAction() ].start();
         this.setRunning();
     }
@@ -48,8 +47,6 @@ public class SequentialActionGroup extends Action {
     public void updateState() {
         Action current_action = this._actions[ this.getCurrentAction() ];
         current_action.updateState();
-
-        System.out.println( current_action.toString() );
 
         switch ( current_action.getState() ) {
             case ACTION_STATES_NOT_STARTED:

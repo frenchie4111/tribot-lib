@@ -1,5 +1,6 @@
 package scripts.lib.antiban;
 
+import org.tribot.api.General;
 import org.tribot.api.util.ABCUtil;
 import org.tribot.api2007.*;
 import org.tribot.api2007.types.RSNPC;

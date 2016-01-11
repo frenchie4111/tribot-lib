@@ -18,8 +18,6 @@ public class WaitAttackAction extends Action {
 
     @Override
     public void updateState() {
-        System.out.printf( "Checking wait %b %b \n", !Combat.isUnderAttack(), !this._target_npc.isValid() );
-
         if( !Combat.isUnderAttack() || !this._target_npc.isValid() ) {
             this.setSuccess();
         } else {

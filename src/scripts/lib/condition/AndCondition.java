@@ -16,7 +16,6 @@ public class AndCondition extends Condition {
     public boolean active() {
         for( Condition condition : this._conditions ) {
             if( !condition.active() ) {
-                System.out.printf( "Condition false %S", condition );
                 return false;
             }
         }

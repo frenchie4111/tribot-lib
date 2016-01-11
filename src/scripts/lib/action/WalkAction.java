@@ -25,7 +25,6 @@ public class WalkAction extends Action {
     @Override
     public void start() {
         super.start();
-
         WebWalking.walkTo( this._target.getPosition() );
     }
 }
