@@ -8,10 +8,10 @@ import scripts.lib.action.combat.AttackTargetFilter;
 /**
  * Created by mike on 1/10/2016.
  */
-public class NPCInRangeCondition extends Condition {
+public class IsNPCInRange extends Condition {
     private String _npc_name;
 
-    public NPCInRangeCondition( String npc_name ) {
+    public IsNPCInRange( String npc_name ) {
         this._npc_name = npc_name;
     }
 

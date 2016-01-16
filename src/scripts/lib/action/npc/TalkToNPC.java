@@ -5,7 +5,7 @@ import org.tribot.api2007.Camera;
 import org.tribot.api2007.NPCs;
 import org.tribot.api2007.types.RSNPC;
 import scripts.lib.action.Action;
-import scripts.lib.condition.InDialogueCondition;
+import scripts.lib.condition.IsInDialogue;
 
 /**
  * Created by mike on 1/10/2016.
@@ -34,7 +34,7 @@ public class TalkToNPC extends Action {
             for( int i = 0; i < 5 && npcs[ 0 ].click( "Talk-to " + this._npc_name ); i++ )
                 ;
 
-            Timing.waitCondition( new InDialogueCondition(), 3000 );
+            Timing.waitCondition( new IsInDialogue(), 3000 );
         } else {
             this.setFail();
         }

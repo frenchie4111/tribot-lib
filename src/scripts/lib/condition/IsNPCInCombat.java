@@ -6,10 +6,10 @@ import org.tribot.api2007.types.RSNPC;
 /**
  * Created by mike on 1/8/2016.
  */
-public class NPCInCombatCondition extends Condition {
+public class IsNPCInCombat extends Condition {
     private RSNPC _npc;
 
-    public NPCInCombatCondition( RSNPC _npc ) {
+    public IsNPCInCombat( RSNPC _npc ) {
         this._npc = _npc;
     }
 

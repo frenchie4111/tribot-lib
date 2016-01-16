@@ -5,10 +5,10 @@ import org.tribot.api.types.generic.Condition;
 /**
  * Created by mike on 1/9/2016.
  */
-public class NotCondition extends Condition {
+public class Not extends Condition {
     private Condition _condition;
 
-    public NotCondition( Condition condition ) {
+    public Not( Condition condition ) {
         this._condition = condition;
     }
 

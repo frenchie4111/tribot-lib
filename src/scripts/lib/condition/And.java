@@ -5,10 +5,10 @@ import org.tribot.api.types.generic.Condition;
 /**
  * Created by mike on 1/9/2016.
  */
-public class AndCondition extends Condition {
+public class And extends Condition {
     private Condition[] _conditions;
 
-    public AndCondition( Condition... conditions ) {
+    public And( Condition... conditions ) {
         this._conditions = conditions;
     }
 

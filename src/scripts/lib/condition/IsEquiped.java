@@ -6,10 +6,10 @@ import org.tribot.api2007.Equipment;
 /**
  * Created by mike on 1/15/2016.
  */
-public class IsEquipedCondition extends Condition {
+public class IsEquiped extends Condition {
     private String _item_name;
 
-    public IsEquipedCondition( String item_name ) {
+    public IsEquiped( String item_name ) {
         this._item_name = item_name;
     }
 
