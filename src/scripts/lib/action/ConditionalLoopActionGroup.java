@@ -15,6 +15,7 @@ public class ConditionalLoopActionGroup extends SequentialActionGroup {
 
     @Override
     public void complete() {
+        super.start();
         if( this._loop_condition.active() ) {
             if( this.getDirection() > 0 ) {
                 this.setCurrentAction( 0 );

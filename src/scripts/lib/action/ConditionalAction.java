@@ -18,6 +18,7 @@ public class ConditionalAction extends Action {
 
     @Override
     public void start() {
+        super.start();
         if( this._condition.active() ) {
             this._action.start();
             this._started = true;
@@ -28,7 +29,9 @@ public class ConditionalAction extends Action {
 
     @Override
     public void updateState() {
-        this._action.updateState();
+        if( this._started ) {
+            this._action.updateState();
+        }
     }
 
     @Override

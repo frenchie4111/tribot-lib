@@ -23,7 +23,9 @@ public class EquipAction extends Action {
 
         RSItem[] items = Inventory.find( this._item_name );
 
-        Clicking.click( items[ 0 ] );
+        if( items.length > 0 ) {
+            Clicking.click( items[ 0 ] );
+        }
     }
 
     @Override

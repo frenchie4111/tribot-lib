@@ -1,6 +1,9 @@
 package scripts.lib.action.combat;
 
 import org.tribot.api.Clicking;
+import org.tribot.api.General;
+import org.tribot.api.Timing;
+import org.tribot.api.types.generic.Condition;
 import org.tribot.api2007.Interfaces;
 import org.tribot.api2007.types.RSInterface;
 import scripts.lib.action.Action;
@@ -44,7 +47,15 @@ public class ChangeStanceAction extends Action {
 
     @Override
     public void start() {
+        super.start();
         Clicking.click( Interfaces.get( INTERFACE_COMBAT_TAB_PARENT_ID, INTERFACE_COMBAT_TAB_CHILD_ID ) );
+
+        Timing.waitCondition( new Condition() {
+            @Override
+            public boolean active() {
+                return Interfaces.isInterfaceValid( INTERFACE_STANCE_PARENT_ID );
+            }
+        }, 1000 );
 
         RSInterface stance_interface = Interfaces.get( INTERFACE_STANCE_PARENT_ID );
         RSInterface children[] = stance_interface.getChildren();
@@ -56,6 +67,7 @@ public class ChangeStanceAction extends Action {
 
     @Override
     public void updateState() {
+
         if( Interfaces.get( INTERFACE_STANCE_PARENT_ID, this._stance_child_id + INTERFACE_SELECTED_CHILD_OFFSET ).getTextureID() == INTERFACE_SELECTED_TEXTURE_ID ) {
             this.setSuccess();
         }

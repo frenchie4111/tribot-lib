@@ -1,5 +1,7 @@
 package scripts.lib.action;
 
+import scripts.lib.Properties;
+
 /**
  * Created by mike on 1/6/2016.
  */
@@ -8,6 +10,8 @@ public abstract class Action {
     private Object _result;
 
     public void start() {
+        System.out.println( this.toString() );
+        Properties.getProperties().setCurrentState( this.toString() );
         this.setRunning();
     }
 

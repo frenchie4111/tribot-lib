@@ -6,7 +6,7 @@ package scripts.lib.action;
 public class LoginAction extends Action {
     @Override
     public void start() {
-        this.setRunning();
+        super.start();
     }
 
     @Override
