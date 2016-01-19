@@ -5,7 +5,7 @@ import org.tribot.api.types.generic.Condition;
 /**
  * Created by mike on 1/6/2016.
  */
-public class LoopActionGroup extends ConditionalLoopActionGroup {
+public class Loop extends While {
 
     final static Condition ALWAYS_TRUE = new Condition() {
         @Override
@@ -14,7 +14,7 @@ public class LoopActionGroup extends ConditionalLoopActionGroup {
         }
     };
 
-    public LoopActionGroup( Action[] actions ) {
-        super( actions, ALWAYS_TRUE );
+    public Loop( Action[] actions ) {
+        super( ALWAYS_TRUE, actions );
     }
 }

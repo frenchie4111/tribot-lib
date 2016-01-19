@@ -19,9 +19,7 @@ public class TalkToNPC extends Action {
     }
 
     @Override
-    public void start() {
-        super.start();
-
+    public boolean run() {
         RSNPC npcs[] = NPCs.findNearest( this._npc_name );
 
         if( npcs.length > 0 ) {
@@ -34,9 +32,8 @@ public class TalkToNPC extends Action {
             for( int i = 0; i < 5 && npcs[ 0 ].click( "Talk-to " + this._npc_name ); i++ )
                 ;
 
-            Timing.waitCondition( new IsInDialogue(), 3000 );
-        } else {
-            this.setFail();
+            return Timing.waitCondition( new IsInDialogue(), 3000 );
         }
+        return false;
     }
 }

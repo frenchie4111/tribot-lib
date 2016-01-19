@@ -2,14 +2,12 @@ package scripts.lib.action.ui;
 
 import org.tribot.api.interfaces.Clickable;
 import org.tribot.api2007.Interfaces;
-import org.tribot.api2007.types.RSInterface;
-import scripts.lib.action.Action;
-import scripts.lib.action.click.ClickAction;
+import scripts.lib.action.click.Click;
 
 /**
  * Created by mike on 1/15/2016.
  */
-public class ClickUIElement extends ClickAction {
+public class ClickUIElement extends Click {
     private int _interface_id;
     private int _child_id;
 

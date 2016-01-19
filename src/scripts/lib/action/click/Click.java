@@ -7,14 +7,11 @@ import scripts.lib.action.Action;
 /**
  * Created by mike on 1/10/2016.
  */
-public abstract class ClickAction extends Action {
+public abstract class Click extends Action {
     public abstract Clickable getTarget();
 
     @Override
-    public void start() {
-        super.start();
-        if( !Clicking.click( this.getTarget() ) ) {
-            this.setFail();
-        }
+    public boolean run() {
+        return Clicking.click( this.getTarget() );
     }
 }

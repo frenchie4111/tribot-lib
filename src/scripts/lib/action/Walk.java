@@ -7,24 +7,23 @@ import scripts.lib.position.RandomPosition;
 /**
  * Created by mike on 1/6/2016.
  */
-public class WalkAction extends Action {
+public class Walk extends Action {
     private Position _target;
 
-    public WalkAction( Position target ) {
+    public Walk( Position target ) {
         this._target = target;
     }
 
-    public WalkAction( int[] target_coords ) {
+    public Walk( int[] target_coords ) {
         this( new Position( target_coords ) );
     }
 
-    public WalkAction( int[][] target_coords ) {
+    public Walk( int[][] target_coords ) {
         this( new RandomPosition( target_coords ) );
     }
 
     @Override
-    public void start() {
-        super.start();
-        WebWalking.walkTo( this._target.getPosition() );
+    public boolean run() {
+        return WebWalking.walkTo( this._target.getPosition() );
     }
 }

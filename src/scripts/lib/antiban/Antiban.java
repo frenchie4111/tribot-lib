@@ -1,6 +1,8 @@
 package scripts.lib.antiban;
 
 import org.tribot.api.General;
+import org.tribot.api.Timing;
+import org.tribot.api.types.generic.Condition;
 import org.tribot.api.util.ABCUtil;
 import org.tribot.api2007.*;
 import org.tribot.api2007.types.RSNPC;
@@ -12,6 +14,24 @@ public class Antiban extends org.tribot.api.util.ABCUtil {
     static {
         _abc = new Antiban();
     }
+
+    public static void afterActionSleep() {
+        General.sleep( 200, 1000 );
+    }
+
+    public static boolean waitCondition( Condition condition ) {
+        return waitCondition( condition, 1000 );
+    }
+
+    public static boolean waitCondition( Condition condition, long timeout ) {
+        return Timing.waitCondition( condition, timeout );
+    }
+
+    public static boolean waitCondition( Condition condition, long timeout_min, long timeout_max ) {
+        double timeout = timeout_min + ( ( timeout_max - timeout_min ) * Math.random() );
+        return waitCondition( condition, ( long ) timeout );
+    }
+
 
     /**
      * Orders attack targets using ABC. Inspired by: https://github.com/Laniax/LanAPI/blob/master/Game/Antiban/Antiban.java#L103
