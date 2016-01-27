@@ -11,10 +11,14 @@ public class ClickUIElement extends Click {
     private int _interface_id;
     private int _child_id;
 
-    public ClickUIElement( int interface_id, int child_id ) {
+    public ClickUIElement( String option, int interface_id, int child_id ) {
         super();
         this._interface_id = interface_id;
         this._child_id = child_id;
+    }
+
+    public ClickUIElement( int interface_id, int child_id ) {
+        this( null, interface_id, child_id );
     }
 
     @Override

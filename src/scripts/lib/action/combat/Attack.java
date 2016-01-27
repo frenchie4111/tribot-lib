@@ -2,6 +2,7 @@ package scripts.lib.action.combat;
 
 import org.tribot.api2007.*;
 import org.tribot.api2007.types.RSNPC;
+import org.tribot.api2007.types.RSObject;
 import scripts.lib.action.Action;
 import scripts.lib.action.LinearGroup;
 import scripts.lib.antiban.Antiban;
@@ -21,13 +22,7 @@ public class Attack extends LinearGroup {
     @Override
     public boolean run() {
         RSNPC npcs[] = NPCs.findNearest( new AttackTargetFilter( this._npc_name ) );
-        npcs = Antiban.orderTargets( npcs );
-
-        if( npcs.length < 1 ) {
-            return false;
-        }
-
-        RSNPC target_npc = npcs[ 0 ];
+        RSNPC target_npc = ( RSNPC ) Antiban.selectTarget( npcs );
 
         this.setActions( new Action[] {
                 new BeginAttack( target_npc ),

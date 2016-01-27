@@ -1,5 +1,6 @@
 package scripts.lib.action.npc;
 
+import org.tribot.api.DynamicClicking;
 import org.tribot.api.Timing;
 import org.tribot.api2007.Camera;
 import org.tribot.api2007.NPCs;
@@ -29,8 +30,7 @@ public class TalkToNPC extends Action {
                 Camera.turnToTile( npcs[ 0 ] );
             }
 
-            for( int i = 0; i < 5 && npcs[ 0 ].click( "Talk-to " + this._npc_name ); i++ )
-                ;
+            DynamicClicking.clickRSNPC( npcs[ 0 ], "Talk-to " + this._npc_name );
 
             return Timing.waitCondition( new IsInDialogue(), 3000 );
         }

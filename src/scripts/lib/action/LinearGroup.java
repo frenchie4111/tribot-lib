@@ -18,9 +18,7 @@ public class LinearGroup extends Action {
     public boolean run() {
         boolean quit = false;
 
-        System.out.printf( "GO \n" );
         for( Action a : this._actions ) {
-            System.out.printf( "LinearGroup %S\n", a.toString() );
             if( !a.start() ) {
                 quit = true;
                 break;
