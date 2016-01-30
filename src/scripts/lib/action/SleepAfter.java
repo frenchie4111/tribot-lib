@@ -8,10 +8,8 @@ import scripts.lib.antiban.Antiban;
 public abstract class SleepAfter extends Action {
     @Override
     public boolean start() {
-        if( super.start() ) {
-            Antiban.afterActionSleep();
-            return true;
-        }
-        return false;
+        boolean return_value = super.start();
+        Antiban.afterActionSleep();
+        return return_value;
     }
 }
