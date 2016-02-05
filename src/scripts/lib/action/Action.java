@@ -10,7 +10,7 @@ public abstract class Action {
 
     public boolean start() {
         Properties.getProperties().setCurrentState( this.toString() );
-        System.out.println( this.toString() );
+//        System.out.println( this.toString() );
         return this.run();
     }
 }

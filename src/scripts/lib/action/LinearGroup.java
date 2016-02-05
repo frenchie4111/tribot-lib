@@ -20,6 +20,7 @@ public class LinearGroup extends Action {
 
         for( Action a : this._actions ) {
             if( !a.start() ) {
+                System.out.println( "Failed" );
                 quit = true;
                 break;
             }

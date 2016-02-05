@@ -12,6 +12,8 @@ public class Wait extends Action {
     private int _timeout_min;
     private int _timeout_max;
 
+    private boolean _return_condition = true;
+
     public Wait( Condition condition, int timeout_min, int timeout_max ) {
         this._condition = condition;
         this._timeout_min = timeout_min;
@@ -33,6 +35,8 @@ public class Wait extends Action {
                 return false;
             }
         }, timeout, timeout );
+
+        this._return_condition = false;
     }
 
     public Wait( int timeout_min, int timeout_max ) {
@@ -42,11 +46,13 @@ public class Wait extends Action {
                 return false;
             }
         }, timeout_min, timeout_max );
+
+        this._return_condition = false;
     }
 
     @Override
     public boolean run() {
-        Antiban.waitCondition( this._condition, ( long ) this._timeout_min, ( long ) this._timeout_max );
-        return true;
+        boolean result = Antiban.waitCondition( this._condition, ( long ) this._timeout_min, ( long ) this._timeout_max );
+        return !this._return_condition || result;
     }
 }

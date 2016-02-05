@@ -16,7 +16,9 @@ public class While extends LinearGroup {
     @Override
     public boolean run() {
         while( this._loop_condition.active() ) {
-            super.run();
+            if( !super.run() ) {
+                return false;
+            }
         }
         return true;
     }

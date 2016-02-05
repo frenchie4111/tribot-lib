@@ -10,9 +10,10 @@ import scripts.lib.action.click.Click;
 public class ClickUIElement extends Click {
     private int _interface_id;
     private int _child_id;
+    private String _option;
 
     public ClickUIElement( String option, int interface_id, int child_id ) {
-        super();
+        super( option );
         this._interface_id = interface_id;
         this._child_id = child_id;
     }

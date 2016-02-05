@@ -36,6 +36,8 @@ public class Loot extends Action {
             final RSGroundItem item = ( RSGroundItem ) Antiban.selectTarget( items );
 
             Camera.turnToTile( item );
+//            Camera.setCameraAngle( Camera.getTileAngle( item ) );
+            System.out.printf( "Is On screen %b \n", item.isOnScreen() );
             item.click( "Take " + _name );
 
             Timing.waitCondition( new Condition() {

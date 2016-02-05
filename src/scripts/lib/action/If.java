@@ -17,15 +17,11 @@ public class If extends Action {
 
     @Override
     public boolean run() {
-        System.out.println( "Active asked" );
-
         return this._action.run();
     }
 
     @Override
     public boolean start() {
-        System.out.println( "Active asked" );
-
         if( this._condition.active() ) {
             return super.start();
         }

@@ -1,6 +1,7 @@
 package scripts.lib.action.click;
 
 import org.tribot.api.Clicking;
+import org.tribot.api.DynamicClicking;
 import org.tribot.api.interfaces.Clickable;
 import scripts.lib.action.Action;
 
