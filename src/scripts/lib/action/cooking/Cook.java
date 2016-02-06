@@ -12,7 +12,8 @@ import scripts.lib.action.inventory.UseOn;
 public class Cook extends LinearGroup {
     public Cook( String item_name, String cooker_name ) {
         super( new Action[] {
-            new UseOn( item_name, cooker_name )
+            new BeginCook( item_name, cooker_name ),
+            new WaitForCookingToStop()
         } );
     }
 }
