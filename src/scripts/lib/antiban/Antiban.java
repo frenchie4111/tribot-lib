@@ -4,8 +4,11 @@ import org.tribot.api.General;
 import org.tribot.api.Timing;
 import org.tribot.api.interfaces.Positionable;
 import org.tribot.api.types.generic.Condition;
+import org.tribot.api.util.abc.ABCProperties;
 import org.tribot.api.util.abc.ABCUtil;
 import org.tribot.api2007.types.RSObject;
+import scripts.lib.condition.Not;
+import scripts.lib.condition.True;
 
 public class Antiban extends ABCUtil {
     private static final long MAX_WAIT_STEP = 10L;
@@ -24,14 +27,19 @@ public class Antiban extends ABCUtil {
         afterActionSleep( 200, 1000 );
     }
 
+    public static void waitTime( long timeout ) {
+        waitCondition( new Not( new True() ), timeout );
+    }
+
     public static boolean waitCondition( Condition condition ) {
         return waitCondition( condition, 1000 );
     }
 
     /**
      * Implementation of TRiBots Timing.waitCondition, by doing it manually we can use runIdleTasks between breaks
+     *
      * @param condition The condition to check
-     * @param timeout The max time to run for
+     * @param timeout   The max time to run for
      * @return Returns true if stopped because of condition, otherwise false
      */
     public static boolean waitCondition( Condition condition, long timeout ) {
@@ -48,7 +56,11 @@ public class Antiban extends ABCUtil {
             }
 
             runIdleTasks(); // TODO: Use argument to control if we runIdleTasks
-            General.sleep( wait_time );
+            try {
+                _abc.sleep( wait_time );
+            } catch( InterruptedException e ) {
+
+            }
             waited_time += wait_time;
         }
 
@@ -58,6 +70,18 @@ public class Antiban extends ABCUtil {
     public static boolean waitCondition( Condition condition, long timeout_min, long timeout_max ) {
         double timeout = timeout_min + ( ( timeout_max - timeout_min ) * Math.random() );
         return waitCondition( condition, ( long ) timeout );
+    }
+
+    public static void sleepABC2( int previous_waiting_time, boolean hovering, boolean menu_open, boolean under_attack ) {
+        ABCProperties props = _abc.getProperties();
+
+        props.setWaitingTime( previous_waiting_time );
+        props.setHovering( hovering );
+        props.setMenuOpen( menu_open );
+        props.setUnderAttack( under_attack );
+        props.setWaitingFixed( false );
+
+        waitTime( _abc.generateReactionTime() );
     }
 
     public static void runIdleTasks() {
