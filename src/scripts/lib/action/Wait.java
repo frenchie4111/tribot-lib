@@ -52,6 +52,7 @@ public class Wait extends Action {
 
     @Override
     public boolean run() {
+        Antiban.runIdleTasks();
         boolean result = Antiban.waitCondition( this._condition, ( long ) this._timeout_min, ( long ) this._timeout_max );
         return !this._return_condition || result;
     }
