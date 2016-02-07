@@ -11,6 +11,8 @@ import scripts.lib.action.*;
 import scripts.lib.action.camera.TurnToTile;
 import scripts.lib.action.click.Click;
 import scripts.lib.antiban.Antiban;
+import scripts.lib.condition.IsOnScreen;
+import scripts.lib.condition.Not;
 
 /**
  * Created by mike on 1/19/2016.
@@ -32,15 +34,18 @@ public class Loot extends RuntimeLinearGroup {
         final RSGroundItem target_item = ( RSGroundItem ) Antiban.selectTarget( items );
 
         return new Action[] {
-            new TurnToTile( target_item ),
-            new Click( target_item, "Take " + this._name ),
-            new Wait( new Condition() {
+                new If(
+                        new Not( new IsOnScreen( target_item.getPosition() ) ),
+                        new TurnToTile( target_item )
+                ),
+                new Click( target_item, "Take " + this._name ),
+                new Wait( new Condition() {
                 @Override
                 public boolean active() {
                     return Inventory.getAll().length > starting_inventory_length;
                 }
             }, 5000 ),
-            new AfterActionSleep()
+                new AfterActionSleep()
         };
     }
 }
