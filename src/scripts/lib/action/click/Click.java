@@ -3,13 +3,21 @@ package scripts.lib.action.click;
 import org.tribot.api.Clicking;
 import org.tribot.api.DynamicClicking;
 import org.tribot.api.interfaces.Clickable;
+import org.tribot.api.interfaces.Positionable;
 import scripts.lib.action.Action;
 
 /**
  * Created by mike on 1/10/2016.
  */
-public abstract class Click extends Action {
+public class Click extends Action {
+    private Clickable _object;
     private String _option;
+
+    public Click( Clickable object, String option ) {
+        super();
+        this._object = object;
+        this._option = option;
+    }
 
     public Click( String option ) {
         super();
@@ -20,7 +28,9 @@ public abstract class Click extends Action {
         this( null );
     }
 
-    public abstract Clickable getTarget();
+    public Clickable getTarget() {
+        return this._object;
+    };
 
     @Override
     public boolean run() {

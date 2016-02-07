@@ -32,4 +32,8 @@ public class LinearGroup extends Action {
     public void setActions( Action[] actions ) {
         this._actions = actions;
     }
+
+    public Action[] getActions() {
+        return this._actions;
+    }
 }

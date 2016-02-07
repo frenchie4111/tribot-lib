@@ -1,20 +1,21 @@
 package scripts.lib.action.combat;
 
 import org.tribot.api.Timing;
+import org.tribot.api.interfaces.Clickable;
 import org.tribot.api.types.generic.Condition;
-import org.tribot.api.types.generic.Filter;
 import org.tribot.api2007.Camera;
 import org.tribot.api2007.GroundItems;
 import org.tribot.api2007.Inventory;
 import org.tribot.api2007.types.RSGroundItem;
-import scripts.lib.action.Action;
-import scripts.lib.action.SleepAfter;
+import scripts.lib.action.*;
+import scripts.lib.action.camera.TurnToTile;
+import scripts.lib.action.click.Click;
 import scripts.lib.antiban.Antiban;
 
 /**
  * Created by mike on 1/19/2016.
  */
-public class Loot extends Action {
+public class Loot extends RuntimeLinearGroup {
     private String _name;
 
     public Loot( String name ) {
@@ -22,35 +23,24 @@ public class Loot extends Action {
     }
 
     @Override
-    public boolean run() {
-        RSGroundItem items[] = GroundItems.find( new Filter< RSGroundItem >() {
-            @Override
-            public boolean accept( RSGroundItem rsGroundItem ) {
-                return rsGroundItem.getDefinition().getName().startsWith( _name );
-            }
-        } );
+    public Action[] getActions() {
+        RSGroundItem items[] = GroundItems.find( this._name );
+        if( items.length <= 0 ) return new Action[] {};
 
         final int starting_inventory_length = Inventory.getAll().length;
 
-        if( items.length > 0 ) {
-            final RSGroundItem item = ( RSGroundItem ) Antiban.selectTarget( items );
+        final RSGroundItem target_item = ( RSGroundItem ) Antiban.selectTarget( items );
 
-            Camera.turnToTile( item );
-//            Camera.setCameraAngle( Camera.getTileAngle( item ) );
-            System.out.printf( "Is On screen %b \n", item.isOnScreen() );
-            item.click( "Take " + _name );
-
-            Timing.waitCondition( new Condition() {
+        return new Action[] {
+            new TurnToTile( target_item ),
+            new Click( target_item, "Take " + this._name ),
+            new Wait( new Condition() {
                 @Override
                 public boolean active() {
                     return Inventory.getAll().length > starting_inventory_length;
                 }
-            }, 5000 );
-
-            Antiban.afterActionSleep( 25, 200 );
-            return Inventory.getAll().length > starting_inventory_length;
-        }
-
-        return false;
+            }, 5000 ),
+            new AfterActionSleep()
+        };
     }
 }
